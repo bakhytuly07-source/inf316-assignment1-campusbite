@@ -115,7 +115,7 @@ Preferred implementation order:
 
 If the repository is empty and the human asks to implement:
 
-- **Stack:** TypeScript, Next.js (App Router) or equivalent React + API, SQLite or Postgres via an ORM.
+- **Stack:** Django + SQLite. Tests via `python manage.py test`. (See `process.md`.)
 - **Styling:** simple, high-contrast, large tap targets (students on phones in a crowd; staff on a counter tablet).
 - **Seed data:** SDU-flavored menu (plov, lagman, samsa, coffee, tea) with KZT prices and at least two stations.
 - **Demo accounts:**
