@@ -221,3 +221,43 @@ If a gate fails, the next prompt is a fix, not a new epic.
 The process succeeded if another student could clone the repo, give `AGENT.md` to an agent, and extend CampusBite **without re-discovering** that SDU needs pickup slots rather than delivery.
 
 The product succeeded if a demo shows: order before the break, skip the choosing queue, collect by number.
+
+---
+
+## Roles
+
+- PM — grooms a task before anyone implements it, follows `roles/pm.md` and `_docs/task-template.md`
+- Engineer — implements one groomed task, follows `roles/software-engineer.md`
+- QA — checks the result against the acceptance criteria, follows `roles/qa-engineer.md`
+
+## Orchestrator
+
+The main session is the orchestrator. It launches the PM, the engineer and QA as subagents.
+It does not groom, implement or test itself.
+
+### Lifecycle
+
+1. Pick the next open issue from the backlog (GitHub issues are the only active backlog)
+2. PM grooms it into four sections: Goal, Acceptance criteria, Out of scope, Constraints
+3. Engineer implements it
+4. QA verifies it and posts PASS or FAIL as an issue comment
+5. On FAIL, back to step 3 with the QA comment as input
+6. On PASS, close the issue
+7. Repeat until the backlog is empty
+
+### Rules
+
+- Do not skip step 2
+- The engineer does not close the issue
+- QA does not fix the code, only outputs PASS or FAIL
+- The orchestrator closes the issue only after QA outputs PASS
+- Anything moved out of scope gets its own follow-up issue and a link
+
+## Stack
+
+Django + SQLite, tests with `python manage.py test`. Web first, English UI, mock payments.
+
+## Documents
+
+- `_docs/task-template.md` — issue template
+- `roles/pm.md`, `roles/software-engineer.md`, `roles/qa-engineer.md` — agent roles
